@@ -1,29 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>Myanmar Quiz Game</title>
+
 <style>
 body{
-font-family:Arial;
+font-family:Arial,sans-serif;
 background:#f5f5f5;
 text-align:center;
 padding:20px;
 }
+
 .container{
 background:white;
 padding:20px;
 border-radius:10px;
-max-width:500px;
+max-width:600px;
 margin:auto;
 }
+
 button{
 padding:10px 20px;
-font-size:18px;
-background:#28a745;
-color:white;
+margin:10px;
 border:none;
+background:green;
+color:white;
 border-radius:5px;
 }
+
+#answer{
+margin-top:10px;
+font-weight:bold;
+}
+
 </style>
 </head>
 
@@ -33,17 +43,105 @@ border-radius:5px;
 
 <h1>Myanmar Quiz Game</h1>
 
-<p>မြန်မာ + English Quiz Website</p>
+<h3 id="qno">Question 1</h3>
 
-<h3>Question 1</h3>
+<p id="question"></p>
 
-<p>What is the capital of Myanmar?</p>
+<button onclick="showAnswer()">Show Answer</button>
 
-<button onclick="alert('Correct Answer: Nay Pyi Taw')">
-Show Answer
-</button>
+<p id="answer"></p>
+
+<button onclick="nextQuestion()">Next Question</button>
 
 </div>
+
+<script>
+
+const quiz = [
+
+{q:"What is the capital of Myanmar?",a:"Naypyidaw"},
+{q:"What is 5 + 5?",a:"10"},
+{q:"What color is the sky?",a:"Blue"},
+{q:"What is the national animal of Myanmar?",a:"Tiger"},
+{q:"Which ocean is largest?",a:"Pacific"},
+{q:"What is 10 x 10?",a:"100"},
+{q:"How many days in a week?",a:"7"},
+{q:"Which planet is known as Red Planet?",a:"Mars"},
+{q:"What is H2O?",a:"Water"},
+{q:"Which country is famous for sushi?",a:"Japan"},
+
+{q:"Question 11",a:"Answer 11"},
+{q:"Question 12",a:"Answer 12"},
+{q:"Question 13",a:"Answer 13"},
+{q:"Question 14",a:"Answer 14"},
+{q:"Question 15",a:"Answer 15"},
+{q:"Question 16",a:"Answer 16"},
+{q:"Question 17",a:"Answer 17"},
+{q:"Question 18",a:"Answer 18"},
+{q:"Question 19",a:"Answer 19"},
+{q:"Question 20",a:"Answer 20"},
+
+{q:"Question 21",a:"Answer 21"},
+{q:"Question 22",a:"Answer 22"},
+{q:"Question 23",a:"Answer 23"},
+{q:"Question 24",a:"Answer 24"},
+{q:"Question 25",a:"Answer 25"},
+{q:"Question 26",a:"Answer 26"},
+{q:"Question 27",a:"Answer 27"},
+{q:"Question 28",a:"Answer 28"},
+{q:"Question 29",a:"Answer 29"},
+{q:"Question 30",a:"Answer 30"},
+
+{q:"Question 31",a:"Answer 31"},
+{q:"Question 32",a:"Answer 32"},
+{q:"Question 33",a:"Answer 33"},
+{q:"Question 34",a:"Answer 34"},
+{q:"Question 35",a:"Answer 35"},
+{q:"Question 36",a:"Answer 36"},
+{q:"Question 37",a:"Answer 37"},
+{q:"Question 38",a:"Answer 38"},
+{q:"Question 39",a:"Answer 39"},
+{q:"Question 40",a:"Answer 40"},
+
+{q:"Question 41",a:"Answer 41"},
+{q:"Question 42",a:"Answer 42"},
+{q:"Question 43",a:"Answer 43"},
+{q:"Question 44",a:"Answer 44"},
+{q:"Question 45",a:"Answer 45"},
+{q:"Question 46",a:"Answer 46"},
+{q:"Question 47",a:"Answer 47"},
+{q:"Question 48",a:"Answer 48"},
+{q:"Question 49",a:"Answer 49"},
+{q:"Question 50",a:"Answer 50"}
+
+];
+
+let current=0;
+
+function loadQuestion(){
+document.getElementById("qno").innerHTML="Question "+(current+1);
+document.getElementById("question").innerHTML=quiz[current].q;
+document.getElementById("answer").innerHTML="";
+}
+
+function showAnswer(){
+document.getElementById("answer").innerHTML=quiz[current].a;
+}
+
+function nextQuestion(){
+current++;
+
+if(current>=quiz.length){
+alert("Quiz Finished!");
+current=0;
+}
+
+loadQuestion();
+}
+
+loadQuestion();
+
+</script>
 
 </body>
 </html>
