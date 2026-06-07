@@ -2,6 +2,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Myanmar Quiz Game</title>
 
 <style>
@@ -18,22 +20,34 @@ padding:20px;
 border-radius:10px;
 max-width:600px;
 margin:auto;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
 button{
-padding:10px 20px;
+padding:12px 20px;
 margin:10px;
 border:none;
 background:green;
 color:white;
 border-radius:5px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+opacity:0.9;
 }
 
 #answer{
-margin-top:10px;
+margin-top:15px;
 font-weight:bold;
+color:#006600;
 }
 
+#progress{
+color:#666;
+margin-bottom:10px;
+}
 </style>
 </head>
 
@@ -41,9 +55,11 @@ font-weight:bold;
 
 <div class="container">
 
-<h1>Myanmar Quiz Game</h1>
+<h1>Myanmar + English Quiz</h1>
 
-<h3 id="qno">Question 1</h3>
+<div id="progress"></div>
+
+<h3 id="qno"></h3>
 
 <p id="question"></p>
 
@@ -62,78 +78,87 @@ const quiz = [
 {q:"What is the capital of Myanmar?",a:"Naypyidaw"},
 {q:"What is 5 + 5?",a:"10"},
 {q:"What color is the sky?",a:"Blue"},
-{q:"What is the national animal of Myanmar?",a:"Tiger"},
-{q:"Which ocean is largest?",a:"Pacific"},
-{q:"What is 10 x 10?",a:"100"},
-{q:"How many days in a week?",a:"7"},
-{q:"Which planet is known as Red Planet?",a:"Mars"},
+{q:"Which ocean is largest?",a:"Pacific Ocean"},
 {q:"What is H2O?",a:"Water"},
 {q:"Which country is famous for sushi?",a:"Japan"},
+{q:"How many days are in a week?",a:"7"},
+{q:"Which planet is called the Red Planet?",a:"Mars"},
+{q:"What is 10 x 10?",a:"100"},
+{q:"What is the national animal of Myanmar?",a:"Tiger"},
 
-{q:"Question 11",a:"Answer 11"},
-{q:"Question 12",a:"Answer 12"},
-{q:"Question 13",a:"Answer 13"},
-{q:"Question 14",a:"Answer 14"},
-{q:"Question 15",a:"Answer 15"},
-{q:"Question 16",a:"Answer 16"},
-{q:"Question 17",a:"Answer 17"},
-{q:"Question 18",a:"Answer 18"},
-{q:"Question 19",a:"Answer 19"},
-{q:"Question 20",a:"Answer 20"},
+{q:"What is the largest planet?",a:"Jupiter"},
+{q:"မြန်မာနိုင်ငံ၏ အရှည်ဆုံးမြစ်က ဘာလဲ?",a:"ဧရာဝတီမြစ်"},
+{q:"Which country has the Eiffel Tower?",a:"France"},
+{q:"1 Kilogram equals how many grams?",a:"1000"},
+{q:"ကမ္ဘာ့အမြင့်ဆုံးတောင်က ဘာလဲ?",a:"Mount Everest"},
+{q:"Who invented the telephone?",a:"Alexander Graham Bell"},
+{q:"What is the currency of Japan?",a:"Yen"},
+{q:"မြန်မာနိုင်ငံ လွတ်လပ်ရေးနေ့?",a:"January 4"},
+{q:"Which planet is closest to the Sun?",a:"Mercury"},
+{q:"Myanmar national flower?",a:"Padauk"},
 
-{q:"Question 21",a:"Answer 21"},
-{q:"Question 22",a:"Answer 22"},
-{q:"Question 23",a:"Answer 23"},
-{q:"Question 24",a:"Answer 24"},
-{q:"Question 25",a:"Answer 25"},
-{q:"Question 26",a:"Answer 26"},
-{q:"Question 27",a:"Answer 27"},
-{q:"Question 28",a:"Answer 28"},
-{q:"Question 29",a:"Answer 29"},
-{q:"Question 30",a:"Answer 30"},
+{q:"How many continents are there?",a:"7"},
+{q:"What is the capital of Thailand?",a:"Bangkok"},
+{q:"မြန်မာနိုင်ငံ၏ အကြီးဆုံးမြို့?",a:"ရန်ကုန်"},
+{q:"What is the boiling point of water?",a:"100°C"},
+{q:"Which animal is known as King of the Jungle?",a:"Lion"},
+{q:"What is the capital of South Korea?",a:"Seoul"},
+{q:"Facebook was founded by?",a:"Mark Zuckerberg"},
+{q:"What is 12 x 12?",a:"144"},
+{q:"ကမ္ဘာပေါ်တွင် အကြီးဆုံးသမုဒ္ဒရာ?",a:"Pacific Ocean"},
+{q:"Which country uses Dollar?",a:"United States"},
 
-{q:"Question 31",a:"Answer 31"},
-{q:"Question 32",a:"Answer 32"},
-{q:"Question 33",a:"Answer 33"},
-{q:"Question 34",a:"Answer 34"},
-{q:"Question 35",a:"Answer 35"},
-{q:"Question 36",a:"Answer 36"},
-{q:"Question 37",a:"Answer 37"},
-{q:"Question 38",a:"Answer 38"},
-{q:"Question 39",a:"Answer 39"},
-{q:"Question 40",a:"Answer 40"},
+{q:"What is the capital of China?",a:"Beijing"},
+{q:"Which gas do plants absorb?",a:"Carbon Dioxide"},
+{q:"What is the fastest land animal?",a:"Cheetah"},
+{q:"မြန်မာနိုင်ငံ၏ ငွေကြေး?",a:"Kyat"},
+{q:"How many hours in a day?",a:"24"},
+{q:"Which planet has rings?",a:"Saturn"},
+{q:"Who wrote Romeo and Juliet?",a:"William Shakespeare"},
+{q:"What is the largest mammal?",a:"Blue Whale"},
+{q:"What is 100 ÷ 4?",a:"25"},
+{q:"Which country is famous for pizza?",a:"Italy"},
 
-{q:"Question 41",a:"Answer 41"},
-{q:"Question 42",a:"Answer 42"},
-{q:"Question 43",a:"Answer 43"},
-{q:"Question 44",a:"Answer 44"},
-{q:"Question 45",a:"Answer 45"},
-{q:"Question 46",a:"Answer 46"},
-{q:"Question 47",a:"Answer 47"},
-{q:"Question 48",a:"Answer 48"},
-{q:"Question 49",a:"Answer 49"},
-{q:"Question 50",a:"Answer 50"}
+{q:"What is the capital of India?",a:"New Delhi"},
+{q:"Which bird cannot fly?",a:"Ostrich"},
+{q:"What is the square root of 81?",a:"9"},
+{q:"မြန်မာနိုင်ငံ၏ အမျိုးသားအားကစား?",a:"ချင်းလုံး"},
+{q:"Which planet is known as Earth's twin?",a:"Venus"},
+{q:"How many months are in a year?",a:"12"},
+{q:"What is the capital of Australia?",a:"Canberra"},
+{q:"Which metal is liquid at room temperature?",a:"Mercury"},
+{q:"What is the largest desert in the world?",a:"Sahara Desert"},
+{q:"Which country hosted the 2020 Olympics?",a:"Japan"}
 
 ];
 
-let current=0;
+let current = 0;
 
 function loadQuestion(){
-document.getElementById("qno").innerHTML="Question "+(current+1);
-document.getElementById("question").innerHTML=quiz[current].q;
-document.getElementById("answer").innerHTML="";
+document.getElementById("progress").innerHTML =
+"Question " + (current + 1) + " / " + quiz.length;
+
+document.getElementById("qno").innerHTML =
+"Question " + (current + 1);
+
+document.getElementById("question").innerHTML =
+quiz[current].q;
+
+document.getElementById("answer").innerHTML = "";
 }
 
 function showAnswer(){
-document.getElementById("answer").innerHTML=quiz[current].a;
+document.getElementById("answer").innerHTML =
+"Answer: " + quiz[current].a;
 }
 
 function nextQuestion(){
+
 current++;
 
-if(current>=quiz.length){
-alert("Quiz Finished!");
-current=0;
+if(current >= quiz.length){
+alert("🎉 Quiz Finished!");
+current = 0;
 }
 
 loadQuestion();
